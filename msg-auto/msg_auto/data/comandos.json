@@ -1,0 +1,127 @@
+{
+  "//0": {
+    "message": " Tudo bem?\n\nComo posso ajudar você?",
+    "greeting": true,
+    "is_default": true
+  },
+  "//1": {
+    "message": "Tudo bem por aqui. E você?\n\nVerificando, só um momento.",
+    "greeting": true,
+    "is_default": true
+  },
+  "//2": {
+    "message": "\n\nVerificando, só um momento.",
+    "greeting": true,
+    "is_default": true
+  },
+  "//3": {
+    "message": " Tudo bem?\n\nPreciso de um auxílio com esta NF: ",
+    "greeting": true,
+    "is_default": true
+  },
+  "//4": {
+    "message": " Tudo bem?\n\nSegue e-mail referente a NF: \n\nPoderia nos auxiliar?",
+    "greeting": true,
+    "is_default": true
+  },
+  "//5": {
+    "message": " Tudo bem por aqui! E você?\n\nComo posso ajudar você hoje?",
+    "greeting": true,
+    "is_default": true
+  },
+  "//6": {
+    "message": "Por gentileza, teria o PDF desta NF? \n\nOu teria o número da nota fiscal para eu verificar melhor?",
+    "greeting": true,
+    "is_default": true
+  },
+  "//+": {
+    "message": "Por nada, eu é quem agradeço! \n\nSe precisar, pode chamar estou à disposição.",
+    "greeting": false,
+    "is_default": true
+  },
+  "//.": {
+    "message": "Muito obrigado!",
+    "greeting": false,
+    "is_default": true
+  },
+  "**.": {
+    "message": "A mercadoria está com previsão de entrega para dia ",
+    "greeting": true,
+    "is_default": true
+  },
+  "**0": {
+    "message": "Vou verificar e já te retorno.",
+    "greeting": false,
+    "is_default": true
+  },
+  "**1": {
+    "message": "sac2.blu@arletetransportes.com.br",
+    "greeting": false,
+    "is_default": true
+  },
+  "**2": {
+    "message": "Mercadoria entregue segue comprovante.",
+    "greeting": false,
+    "is_default": true
+  },
+  "**3": {
+    "message": "Esta mercadoria está em rota de entrega hoje, deve ser finalizada em horário comercial. \n\nSerá entregue no endereço acima.",
+    "greeting": false,
+    "is_default": true
+  },
+  "//d": {
+    "message": "Vamos precisar dos dados da pessoa que irá retirar:\nNome Completo: \nRG ou CPF: \nPlaca do veículo: ",
+    "greeting": false,
+    "is_default": true
+  },
+  "**5": {
+    "message": "Cliente acionado, aguardando retorno.",
+    "greeting": false,
+    "is_default": true
+  },
+  "**6": {
+    "message": "Verificando / Cobrando retorno.",
+    "greeting": false,
+    "is_default": true
+  },
+  "**7": {
+    "message": "Base acionada, aguardando retorno.",
+    "greeting": false,
+    "is_default": true
+  },
+  "--4": {
+    "message": "Olá!\n\nEstamos conversando sobre a NF: \n\nVou verificar e já te retorno.",
+    "greeting": false,
+    "is_default": true
+  },
+  "--1": {
+    "message": "\n\nReentrega em sistema,\n\nGentileza informar a nova previsão",
+    "greeting": true,
+    "is_default": true
+  },
+  "--2": {
+    "message": "\n\nReentrega e CC-e em sistema.\n\nGentileza informar a nova previsão.",
+    "greeting": true,
+    "is_default": true
+  },
+  "--3": {
+    "message": "\n\n@\n\nGentileza verificar.",
+    "greeting": true,
+    "is_default": true
+  },
+  "//b": {
+    "message": "Arlete Transportes Filial (BLU)  - \nRodovia Ingo Henring, 8979 CNPJ: 72.090.442/0009-34\nBairro: Margem Esquerda \n\nCep: 89116-755 - Gaspar/SC \nFone:(47) 3318-0980\nContato: blumenau@arletetransportes.com.br \nhttps://www.google.com/maps?q=-26.9167197,-48.9699487",
+    "greeting": false,
+    "is_default": true
+  },
+  "/it": {
+    "message": "Olá\nComo estás",
+    "greeting": false,
+    "is_default": false
+  },
+  "/ola": {
+    "message": "Olá, como vai?",
+    "greeting": false,
+    "is_default": false
+  }
+}
