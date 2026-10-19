@@ -2,6 +2,7 @@
 import tkinter as tk
 
 from .window_utils import setup_window_keyboard
+from .window_placement import abrir_na_posicao_da_principal
 
 
 class ListWindow(tk.Toplevel):
@@ -14,6 +15,7 @@ class ListWindow(tk.Toplevel):
 
         self.title("Todas as mensagens")
         self.geometry("480x460")
+        abrir_na_posicao_da_principal(self)
 
         text = tk.Text(self, wrap="word")
         text.pack(fill="both", expand=True, padx=10, pady=10)

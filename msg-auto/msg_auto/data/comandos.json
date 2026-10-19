@@ -114,14 +114,104 @@
     "greeting": false,
     "is_default": true
   },
-  "/it": {
-    "message": "Olá\nComo estás",
+  "/tub": {
+    "message": "Rua Arlete Teresinha Orlandi da Silva, 200\nBairro: - São João Margem Esquerda\nCep: - 88708-418\nCidade: - Tubarão/SC\nContato: - (48) 3626-6526 - (48) 98802-5500 - (48) 3626-6526",
     "greeting": false,
-    "is_default": false
+    "is_default": true
   },
-  "/ola": {
-    "message": "Olá, como vai?",
+  "/sao": {
+    "message": "Rua da Despedida, 111\nBairro: - Vila dos Remédios\nCep: - 05102-050\nCidade: - São Paulo/SP\nContato: - (11) 3641-0166 - (11) 98449-1171 - (11) 99417-8663",
     "greeting": false,
-    "is_default": false
+    "is_default": true
+  },
+  "/cpn": {
+    "message": "Rua do Parque, 300\nBairro: - Parque Villa Flores\nCep: - 13175-660\nCidade: - Sumaré / SP\nContato: - (19) 99836-1476",
+    "greeting": false,
+    "is_default": true
+  },
+  "/san": {
+    "message": "Av Joaquim Norberto de Souza, 241\nBairro: - Ribeiropolis\nCep: - 11714-420\nCidade: - Praia Grande / SP\nContato: - (13) 3592-3745",
+    "greeting": false,
+    "is_default": true
+  },
+  "/cwb": {
+    "message": "Rua Alexandre Zanchetta,110\nBairro: - Campina\nCep: - 83325-070\nCidade: - São José dos Pinhais/PR\nContato: - (41) 3283-5505 - (41) 3283-5505 - (41) 98855 8886",
+    "greeting": false,
+    "is_default": true
+  },
+  "/jvl": {
+    "message": "Rodovia BR 101 - km 046\nBairro: - Nova Brasilia\nCep: - 89213-205\nCidade: - Joinville/SC\nContato: - (47) 3440-0240 - (47) 98843-7690 - (47) 98865-7876",
+    "greeting": false,
+    "is_default": true
+  },
+  "/cri": {
+    "message": "Rua Dilnei Luiz Piovesan, S/N\nBairro: - Cristo Redentor\nCep: - 88816-300\nCidade: - Criciúma/SC\nContato: - (48) 3442-0765 - (48) 98855-4029 - (48) 99818-0033",
+    "greeting": false,
+    "is_default": true
+  },
+  "/fln": {
+    "message": "Rua Roney Henrique Heiderscheidt, 60\nBairro: - Cond CEIP - Jardim Eldorado\nCep: - 88133-500\nCidade: - Palhoça/SC\nContato: - (48) 3285-6413 - (48) 98866-5979 - (48) 99665-3667",
+    "greeting": false,
+    "is_default": true
+  },
+  "/jgs": {
+    "message": "Av Pref. Waldemar Grubba, 1896\nBairro: - Vila Lalau\nCep: - 89256-501\nCidade: - Jaraguá do Sul/SC\nContato: - (47) 3208-9538",
+    "greeting": false,
+    "is_default": true
+  },
+  "/sbs": {
+    "message": "Rua Eduardo Liebl, 72\nBairro: - Serra Alta\nCep: - 88133-515\nCidade: - São Bento do Sul/SC\nContato: - (47) 3633-2892",
+    "greeting": false,
+    "is_default": true
+  },
+  "/ibm": {
+    "message": "Rua dos Veradores, 440\nBairro: - Itoupava\nCep: - 89162-850\nCidade: - Rio do Sul/SC\nContato: - (47) 3525-1611",
+    "greeting": false,
+    "is_default": true
+  },
+  "/lgs": {
+    "message": "Avenida Belem, 1270\nBairro: - Santa Helena\nCep: - 88504-480\nCidade: - Lages/SC\nContato: - (49) 3222-4619",
+    "greeting": false,
+    "is_default": true
+  },
+  "/jcb": {
+    "message": "Rua Odete Aquino Dallaio, 113\nBairro: -\nCep: - 89600-000\nCidade: - Joaçaba/SC\nContato: - (49) 3521-0172",
+    "greeting": false,
+    "is_default": true
+  },
+  "/xap": {
+    "message": "Rua Humaita, 2679\nBairro: - Dom Geronimo\nCep: - 89805-295\nCidade: - Chapecó/SC\nContato: - (49) 3324-2343",
+    "greeting": false,
+    "is_default": true
+  },
+  "/smd": {
+    "message": "Rua São Pedro, 147 D\nBairro: - Centro\nCep: - 89801-300\nCidade: - Chapecó/SC\nContato: - (49) 99988-8874",
+    "greeting": false,
+    "is_default": true
+  },
+  "/poa": {
+    "message": "Estrada José Zingano, 846 - Pavilhão 11 e 12\nBairro: - Dist. Industrial\nCep: - 94930-280\nCidade: - Cachoeirinha/RS\nContato: - (51) 3251-0683 - (51) 3251-0683 - (51) 3251-0683",
+    "greeting": false,
+    "is_default": true
+  },
+  "/nhb": {
+    "message": "Rua Dr. Karl Wilhelm Schinke, 69\nBairro: - Rondonia\nCep: - 93415-240\nCidade: - Novo Hamburgo / RS\nContato: - (51) 3527-3122",
+    "greeting": false,
+    "is_default": true
+  },
+  "/igr": {
+    "message": "Rua Ruberto Alfredo Brocker, 83\nBairro: - Sander\nCep: - 95666-000\nCidade: - Três Coroas/RS\nContato: - (51) 3546-5014",
+    "greeting": false,
+    "is_default": true
+  },
+  "/cax": {
+    "message": "Rua Domingos Chies, 982\nBairro: - Interlagos\nCep: - 95052-160\nCidade: - Caxias do Sul/RS\nContato: - (54) 3533-4735 - (54) 3533-4735 - (54) 3533-4735",
+    "greeting": false,
+    "is_default": true
+  },
+  "/oso": {
+    "message": "Av. Angelo Gabriel Boff Guasseli, 1494\nBairro: - Parque do Sol\nCep: - 95520-000\nCidade: - Osório / RS\nContato: - (51) 3160-0130",
+    "greeting": false,
+    "is_default": true
   }
 }

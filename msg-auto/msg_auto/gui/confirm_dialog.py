@@ -11,6 +11,7 @@ import tkinter as tk
 from typing import Callable
 
 from .keyboard_menu import KeyboardMenu
+from .window_placement import abrir_na_posicao_da_principal
 
 
 class ConfirmDialog(tk.Toplevel):
@@ -20,6 +21,7 @@ class ConfirmDialog(tk.Toplevel):
 
         self.title("Confirmação")
         self.geometry("340x200")
+        abrir_na_posicao_da_principal(self)
         self.resizable(False, False)
         self.transient(master)
 

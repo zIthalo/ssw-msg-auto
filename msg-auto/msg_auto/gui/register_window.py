@@ -6,6 +6,7 @@ from ..command_service import CommandAlreadyExistsError
 from .text_shortcuts import enable_edit_shortcuts
 from .window_utils import setup_window_keyboard
 from .focus_navigation import enable_arrow_navigation
+from .window_placement import abrir_na_posicao_da_principal
 
 
 class RegisterWindow(tk.Toplevel):
@@ -17,6 +18,7 @@ class RegisterWindow(tk.Toplevel):
 
         self.title("Nova mensagem")
         self.geometry("380x440")
+        abrir_na_posicao_da_principal(self)
 
         tk.Label(self, text="Comando (ex: //9, **a, --z)").pack(pady=(10, 0))
         self.cmd_entry = tk.Entry(self)
@@ -24,6 +26,12 @@ class RegisterWindow(tk.Toplevel):
         enable_edit_shortcuts(self.cmd_entry)
 
         tk.Label(self, text="Mensagem").pack(pady=(10, 0))
+        tk.Label(
+            self,
+            text="Tudo o que for digitado (espaços, Enter, símbolos) é enviado exatamente como está. "
+                 "Com saudação marcada, ela vem antes do texto: comece com Enter para pular linha.",
+            fg="gray", wraplength=350, justify="left",
+        ).pack(padx=10)
         self.msg_text = tk.Text(self, height=12)
         self.msg_text.pack(fill="both", expand=True, padx=10)
         enable_edit_shortcuts(self.msg_text)
@@ -50,10 +58,12 @@ class RegisterWindow(tk.Toplevel):
 
     def salvar(self) -> None:
         trigger = self.cmd_entry.get().strip()
-        message = self.msg_text.get("1.0", "end").strip()
+        # "end-1c" descarta apenas o \n extra que o Tk sempre acrescenta; nada
+        # do que o usuário digitou (espaços, Enter, símbolos) é removido.
+        message = self.msg_text.get("1.0", "end-1c")
         greeting = self.greeting_var.get()
 
-        if not trigger or not message:
+        if not trigger or not message.strip():
             messagebox.showwarning("Atenção", "Preencha o comando e a mensagem.")
             return
 

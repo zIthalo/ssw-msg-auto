@@ -27,6 +27,56 @@ precisar copiar e colar manualmente.
 
 ## Novidades desta versão
 
+- **Mensagens enviadas exatamente como digitadas**: espaços, linhas em
+  branco, Enter, tabs e símbolos no início, meio e fim da mensagem agora
+  são preservados no cadastro e na edição (antes eram removidos nas
+  pontas, o que juntava a saudação ao texto). Com a saudação marcada,
+  ela é colocada antes do texto; para separar, comece a mensagem com
+  Enter (ou espaço). Mensagens já salvas antes desta versão podem ter
+  perdido esses espaços nas pontas: basta editá-las novamente.
+- **Duplo clique na tela "Editar mensagem"** abre a edição do comando
+  (comando, mensagem e saudação) clicado.
+- **Posição das janelas**: a janela principal abre onde foi fechada da
+  última vez (a posição fica em `janela.json`, na pasta de dados; se
+  ela estiver fora da tela, usa a posição padrão). Configurações, suas
+  subtelas e as confirmações abrem na mesma posição da janela
+  principal.
+
+- **Correção definitiva da perda de mensagens ao reiniciar o computador**:
+  - Os dados agora ficam em `%APPDATA%\MensagensAutoSAC` (no Windows:
+    `C:\Users\<usuário>\AppData\Roaming\MensagensAutoSAC`), e não
+    mais ao lado do programa. Pastas como Área de Trabalho/Documentos
+    costumam ser protegidas pelo **"Acesso controlado a pastas"** do
+    Windows Defender, que pode bloquear a gravação sem avisar.
+    Instalações antigas são **migradas automaticamente** na primeira
+    abertura (nada se perde).
+  - **Nunca mais "salva de mentira"**: o sistema relê o arquivo após
+    gravar e só atualiza a tela depois que o disco confirmou. Se a
+    gravação falhar, aparece uma mensagem de erro clara e nada é
+    alterado.
+  - Qualquer erro inesperado em qualquer tela agora é mostrado ao
+    usuário e registrado no log.
+
+- **Robustez contra desligamento abrupto do computador**: se o Windows
+  encerrar o programa à força durante um desligamento/reinício (algo
+  que pode acontecer exatamente durante a gravação do arquivo de
+  comandos), o arquivo de dados **não fica mais corrompido nem
+  esvaziado**:
+  - A gravação agora é **atômica** (grava em um arquivo temporário,
+    força a sincronização física com o disco e só então substitui o
+    arquivo definitivo) - nunca existe um estado "gravado pela
+    metade".
+  - Um **backup automático** (`comandos.json.bak`) é mantido a cada
+    gravação. Se o arquivo principal aparecer ausente ou corrompido na
+    próxima abertura, o sistema **recupera sozinho** a partir do
+    backup, em vez de resetar silenciosamente para os padrões de
+    fábrica.
+  - O log (`%APPDATA%\MensagensAutoSAC\sac11.log`) agora registra cada carregamento,
+    gravação, criação, edição e exclusão de comando - útil para
+    diagnosticar qualquer problema de persistência que venha a ocorrer.
+
+## Novidades de versões anteriores
+
 - **Navegação por setas nas telas de cadastro, edição e exclusão**: nas
   telas de **Nova mensagem**, **Editar mensagem** (lista e formulário)
   e **Excluir mensagem**, as setas **↑ / ↓** movem o foco entre os
@@ -43,17 +93,11 @@ precisar copiar e colar manualmente.
     continuam navegando entre os itens normalmente; só passam o foco
     para o botão seguinte/anterior quando a seleção já está no
     primeiro ou no último item da lista.
-
-## Novidades da versão anterior
-
 - **Navegação completa por teclado** nas telas de menu (Inicial e
   Configurações): ↑/↓ com destaque visual, Enter confirma, números 1-9
   acessam direto, ESC volta (exceto na tela inicial). A confirmação de
   "Restaurar padrões de fábrica" e a de exclusão de comando usam um
   diálogo próprio Sim/Não (1-Sim / 2-Não), também navegável.
-
-## Novidades de versões anteriores
-
 - **Correção de persistência**: comandos e mensagens novas (ou com o
   comando alterado) agora permanecem salvos corretamente após fechar e
   reabrir o sistema. A causa era o hook global de teclado interferindo
@@ -64,6 +108,10 @@ precisar copiar e colar manualmente.
   `Ctrl+Backspace` (apaga a palavra anterior ao cursor) e `Ctrl+Delete`
   (apaga a palavra seguinte ao cursor) já funcionam nos campos de
   "Comando" e "Mensagem" das telas de cadastro e edição.
+- **20 novos comandos padrão de fábrica** com os endereços das demais
+  filiais (`/tub`, `/sao`, `/cpn`, `/san`, `/cwb`, `/jvl`, `/cri`,
+  `/fln`, `/jgs`, `/sbs`, `/ibm`, `/lgs`, `/jcb`, `/xap`, `/smd`,
+  `/poa`, `/nhb`, `/igr`, `/cax`, `/oso`).
 
 ## 1. Requisitos
 
@@ -198,15 +246,15 @@ computador no momento do envio:
 Todos os comandos (padrão e personalizados) ficam salvos localmente em:
 
 ```
-msg_auto/data/comandos.json
+%APPDATA%\MensagensAutoSAC\comandos.json
 ```
 
 Não é necessário instalar ou configurar nenhum servidor de banco de dados
 (o sistema **não usa MySQL nem qualquer servidor externo**) - tudo funciona
 em arquivo local, de forma simples e portátil. Basta copiar essa pasta
-`data` para levar suas mensagens para outro computador.
+`MensagensAutoSAC` para levar suas mensagens para outro computador.
 
-Os registros de execução (log) ficam em `msg_auto/data/sac11.log`.
+Os registros de execução (log) ficam em `%APPDATA%\MensagensAutoSAC\sac11.log`.
 
 > **Extensibilidade**: internamente existe uma interface `CommandRepository`
 > (em `msg_auto/repository.py`). Hoje só há a implementação em JSON, mas se
@@ -313,8 +361,25 @@ aplicativo de destino; o sistema já tenta corrigir automaticamente
 encodings mal interpretados, mas alguns aplicativos legados podem exigir
 ajustes manuais.
 
+**Perdi mensagens depois de desligar/reiniciar o computador.**
+A partir desta versão, isso não deve mais ocorrer: a gravação é atômica
+e há um backup automático (`comandos.json.bak`) com recuperação
+automática. Se ainda assim acontecer, verifique o arquivo
+`%APPDATA%\MensagensAutoSAC\sac11.log` logo após reabrir o programa - ele registra
+se o arquivo principal foi encontrado corrompido e se a recuperação a
+partir do backup foi usada. Guarde esse trecho do log para diagnóstico.
+
+**Apareceu "A gravação não foi confirmada no disco" ou "Acesso negado".**
+Algo está impedindo o programa de gravar em
+`%APPDATA%\MensagensAutoSAC`. Verifique o antivírus e o Windows
+Defender (Segurança do Windows > Proteção contra vírus e ameaças >
+Proteção contra ransomware > Acesso controlado a pastas) e permita o
+Python (`python.exe`/`pythonw.exe`) ou desative o recurso para essa
+pasta. Para abrir a pasta de dados, digite `%APPDATA%\MensagensAutoSAC`
+na barra de endereço do Explorador de Arquivos.
+
 **Quero apagar tudo e recomeçar do zero.**
-Feche o programa e apague o arquivo `msg_auto/data/comandos.json`. Ele
+Feche o programa e apague o arquivo `%APPDATA%\MensagensAutoSAC\comandos.json`. Ele
 será recriado automaticamente com as mensagens padrão de fábrica na
 próxima execução.
 

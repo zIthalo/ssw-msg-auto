@@ -8,6 +8,7 @@ from .delete_window import DeleteWindow
 from .list_window import ListWindow
 from .keyboard_menu import KeyboardMenu
 from .confirm_dialog import ConfirmDialog
+from .window_placement import abrir_na_posicao_da_principal
 
 
 class SettingsWindow(tk.Toplevel):
@@ -29,6 +30,7 @@ class SettingsWindow(tk.Toplevel):
 
         self.title("Configurações")
         self.geometry("300x330")
+        abrir_na_posicao_da_principal(self)
         self.resizable(False, False)
 
         self.menu = KeyboardMenu(

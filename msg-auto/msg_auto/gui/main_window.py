@@ -1,8 +1,12 @@
 # -*- coding: utf-8 -*-
+import logging
+import traceback
 import tkinter as tk
+from tkinter import messagebox
 
 from .settings_window import SettingsWindow
 from .keyboard_menu import KeyboardMenu
+from .window_placement import MainWindowPositionKeeper
 
 
 class MainWindow(tk.Tk):
@@ -15,7 +19,10 @@ class MainWindow(tk.Tk):
         self.app = app
 
         self.title("Mensagens Automáticas - SAC")
-        self.geometry("380x260")
+        # Abre onde o usuário fechou da última vez e continua acompanhando.
+        self.position_keeper = MainWindowPositionKeeper(self)
+        self.geometry(self.position_keeper.geometry_for(380, 260))
+        self.position_keeper.start_tracking()
         self.resizable(False, False)
 
         tk.Label(self, text="Sistema ativo", font=("Segoe UI", 12, "bold")).pack(pady=15)
@@ -38,9 +45,26 @@ class MainWindow(tk.Tk):
 
         self.protocol("WM_DELETE_WINDOW", self.sair)
 
+    def report_callback_exception(self, exc_type, exc_value, exc_tb) -> None:
+        """Rede de segurança: qualquer erro não tratado em qualquer tela
+        (todas compartilham este interpretador Tk) é registrado no log e
+        mostrado ao usuário, em vez de sumir silenciosamente. Assim, uma
+        falha ao salvar nunca passa despercebida."""
+        logging.getLogger("sac11").error(
+            "Erro não tratado na interface", exc_info=(exc_type, exc_value, exc_tb)
+        )
+        detalhe = "".join(traceback.format_exception_only(exc_type, exc_value)).strip()
+        messagebox.showerror(
+            "Ocorreu um erro",
+            "A ação NÃO foi concluída (nada foi alterado).\n\n"
+            f"Detalhe: {detalhe}\n\n"
+            "Mais informações no arquivo de log (sac11.log).",
+        )
+
     def abrir_configuracoes(self) -> None:
         SettingsWindow(self, self.app)
 
     def sair(self) -> None:
+        self.position_keeper.save_now()
         self.app.shutdown()
         self.destroy()

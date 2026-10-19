@@ -532,6 +532,10 @@
    'C:\\Users\\arlete\\Desktop\\ithalo\\codes\\mensagens '
    'auto\\msg-auto\\msg_auto\\gui\\text_shortcuts.py',
    'PYMODULE'),
+  ('msg_auto.gui.window_placement',
+   'C:\\Users\\arlete\\Desktop\\ithalo\\codes\\mensagens '
+   'auto\\msg-auto\\msg_auto\\gui\\window_placement.py',
+   'PYMODULE'),
   ('msg_auto.gui.window_utils',
    'C:\\Users\\arlete\\Desktop\\ithalo\\codes\\mensagens '
    'auto\\msg-auto\\msg_auto\\gui\\window_utils.py',

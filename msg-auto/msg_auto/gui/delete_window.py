@@ -6,6 +6,7 @@ from ..command_service import CommandNotFoundError
 from .window_utils import setup_window_keyboard
 from .confirm_dialog import ConfirmDialog
 from .focus_navigation import enable_arrow_navigation
+from .window_placement import abrir_na_posicao_da_principal
 
 
 class DeleteWindow(tk.Toplevel):
@@ -21,6 +22,7 @@ class DeleteWindow(tk.Toplevel):
 
         self.title("Excluir mensagem")
         self.geometry("300x420")
+        abrir_na_posicao_da_principal(self)
 
         tk.Label(self, text="Selecione um comando para excluir (Enter para excluir):").pack(pady=5)
         self.listbox = tk.Listbox(self, exportselection=False)

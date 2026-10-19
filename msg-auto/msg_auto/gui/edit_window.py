@@ -6,6 +6,7 @@ from ..command_service import CommandAlreadyExistsError, CommandNotFoundError
 from .text_shortcuts import enable_edit_shortcuts
 from .window_utils import setup_window_keyboard
 from .focus_navigation import enable_arrow_navigation
+from .window_placement import abrir_na_posicao_da_principal
 
 
 class EditWindow(tk.Toplevel):
@@ -22,12 +23,14 @@ class EditWindow(tk.Toplevel):
 
         self.title("Editar mensagem")
         self.geometry("300x420")
+        abrir_na_posicao_da_principal(self)
 
-        tk.Label(self, text="Selecione um comando para editar (Enter para abrir):").pack(pady=5)
+        tk.Label(self, text="Selecione um comando (Enter ou duplo clique para editar):").pack(pady=5)
         self.listbox = tk.Listbox(self, exportselection=False)
         self.listbox.pack(fill="both", expand=True, padx=10, pady=5)
         self.listbox.bind("<Return>", lambda e: self._abrir_editor())
         self.listbox.bind("<KP_Enter>", lambda e: self._abrir_editor())
+        self.listbox.bind("<Double-Button-1>", self._on_duplo_clique)
         self._preencher_lista()
 
         self.editar_btn = tk.Button(self, text="Editar selecionado", command=self._abrir_editor)
@@ -46,6 +49,18 @@ class EditWindow(tk.Toplevel):
         if self.listbox.size() > 0:
             self.listbox.selection_set(0)
             self.listbox.activate(0)
+
+    def _on_duplo_clique(self, event) -> str:
+        """Duplo clique em um comando abre o editor (comando, mensagem e
+        saudação) desse item. Cliques fora de qualquer item são ignorados."""
+        indice = self.listbox.nearest(event.y)
+        caixa = self.listbox.bbox(indice) if indice >= 0 else None
+        if caixa and caixa[1] <= event.y <= caixa[1] + caixa[3]:
+            self.listbox.selection_clear(0, "end")
+            self.listbox.selection_set(indice)
+            self.listbox.activate(indice)
+            self._abrir_editor()
+        return "break"
 
     def _abrir_editor(self) -> None:
         selecao = self.listbox.curselection()
@@ -67,6 +82,7 @@ class _EditForm(tk.Toplevel):
 
         self.title(f"Editando {cmd.trigger}")
         self.geometry("380x480")
+        abrir_na_posicao_da_principal(self)
 
         tk.Label(self, text="Comando").pack(pady=(10, 0))
         self.cmd_entry = tk.Entry(self)
@@ -75,6 +91,12 @@ class _EditForm(tk.Toplevel):
         enable_edit_shortcuts(self.cmd_entry)
 
         tk.Label(self, text="Mensagem").pack(pady=(10, 0))
+        tk.Label(
+            self,
+            text="Tudo o que for digitado (espaços, Enter, símbolos) é enviado exatamente como está. "
+                 "Com saudação marcada, ela vem antes do texto: comece com Enter para pular linha.",
+            fg="gray", wraplength=350, justify="left",
+        ).pack(padx=10)
         self.msg_text = tk.Text(self, height=12)
         self.msg_text.insert("1.0", cmd.message)
         self.msg_text.pack(fill="both", expand=True, padx=10)
@@ -105,7 +127,9 @@ class _EditForm(tk.Toplevel):
 
     def salvar(self) -> None:
         novo_trigger = self.cmd_entry.get().strip()
-        message = self.msg_text.get("1.0", "end").strip()
+        # "end-1c" descarta apenas o \n extra que o Tk sempre acrescenta; nada
+        # do que o usuário digitou (espaços, Enter, símbolos) é removido.
+        message = self.msg_text.get("1.0", "end-1c")
         greeting = self.greeting_var.get()
 
         if not novo_trigger or not message:
